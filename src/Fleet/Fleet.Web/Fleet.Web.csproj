@@ -7,6 +7,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\Shared.Web\Shared.Web.csproj" />
+      <ProjectReference Include="..\Fleet.Infra\Fleet.Infra.csproj" />
     </ItemGroup>
 
 </Project>

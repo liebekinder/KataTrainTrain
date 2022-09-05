@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 
 src/.idea/
+
+*.feature.cs
