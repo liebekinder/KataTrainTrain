@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 foreach (var services in projectServiceCollections)
 {
-    services.Register(builder.Services);
+    services.Register(builder.Services, builder.Configuration);
 }
 
 builder.Services.AddControllers();
