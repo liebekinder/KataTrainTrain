@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Shared.Web;
+using Shared.Web.Extensions;
 
 var projectServiceCollections = new ProjectServiceCollection[]
 {
@@ -14,7 +14,7 @@ foreach (var services in projectServiceCollections)
     services.Register(builder.Services, builder.Configuration);
 }
 
-builder.Services.AddControllers();
+builder.Services.ConfigureBackEnd();
 
 var app = builder.Build();
 app.UseHttpsRedirection();

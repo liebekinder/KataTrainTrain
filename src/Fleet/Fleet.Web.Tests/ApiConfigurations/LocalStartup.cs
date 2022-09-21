@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization; 
+using Newtonsoft.Json.Serialization;
+using Shared.Web.Extensions;
 
 
 namespace Fleet.Web.Tests.ApiConfigurations;
@@ -32,8 +33,6 @@ public class LocalStartup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services
-            .AddControllers()
-            .AddFluentValidation(f => f.DisableDataAnnotationsValidation = true);
+        services.ConfigureBackEnd();
     }
 }
