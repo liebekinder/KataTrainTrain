@@ -1,9 +1,11 @@
+using Fleet.Web;
 using Microsoft.AspNetCore.Builder;
 using Shared.Web;
 using Shared.Web.Extensions;
 
 var projectServiceCollections = new ProjectServiceCollection[]
 {
+    new FleetServiceCollection(),
 };
 
 var builder = WebApplication.CreateBuilder(args);

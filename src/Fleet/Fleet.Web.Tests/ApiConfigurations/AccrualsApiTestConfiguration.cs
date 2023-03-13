@@ -1,9 +1,10 @@
 using BoDi;
+using Fleet.Infra;
 using Fleet.Web.Tests.Models.Contexts;
+using Fleet.Web.Tests.Seeders;
 using Lucca.Tests.Api.SpecFlowPlugin;
 using Lucca.Tests.Api.SpecFlowPlugin.Configurations;
 using Lucca.Tests.Api.SpecFlowPlugin.Contexts;
-using Microsoft.EntityFrameworkCore;
 using TechTalk.SpecFlow;
 
 namespace Fleet.Web.Tests.ApiConfigurations
@@ -12,11 +13,12 @@ namespace Fleet.Web.Tests.ApiConfigurations
     {
         protected override IScopedHttpServiceCollection CreateScopedHttpServiceCollection(IObjectContainer objectContainer) =>
             new ScopedHttpServiceCollection(
-                objectContainer.Resolve<PrincipalContext>());
+                objectContainer.Resolve<PrincipalContext>(),
+                objectContainer.Resolve<FeatureContext>());
 
         protected override IStepsDbContextFactory CreateStepsDbContextFactory(IObjectContainer objectContainer) =>
             new StepsDbContextFactory(
-                () => objectContainer.Resolve<FeatureContext>().GetDbOptions<DbContext>()
+                () => objectContainer.Resolve<FeatureContext>().GetDbOptions<FleetContext>()
                 );
 
         protected override IPrincipalContext CreatePrincipalContext(IObjectContainer objectContainer) =>
@@ -24,7 +26,9 @@ namespace Fleet.Web.Tests.ApiConfigurations
         protected override DatabaseSeederConfiguration CreateSeederConfiguration(IObjectContainer objectContainer)
         {
             return
-                new DatabaseSeederConfiguration();
+                new DatabaseSeederConfiguration()
+                    .Associate("GetLocov").With(new GetLocomotivesSeeder())
+                    .Associate("DelLoco").With(new DeleteLocomotiveSeeder());
         }
     }
 }

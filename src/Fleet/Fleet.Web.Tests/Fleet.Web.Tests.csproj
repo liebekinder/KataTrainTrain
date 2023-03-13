@@ -7,6 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <SpecFlowObsoleteCodeBehindFiles Remove="Features\Tests - Copy.feature.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="SpecFlow" Version="3.9.58" />
         <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
         <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.58" />
@@ -34,6 +38,13 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\Shared.Web\Shared.Web.csproj" />
       <ProjectReference Include="..\Fleet.Web\Fleet.Web.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <SpecFlowFeatureFiles Update="Features\DeleteLocomotive.feature">
+        <Visible>$(UsingMicrosoftNETSdk)</Visible>
+        <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+      </SpecFlowFeatureFiles>
     </ItemGroup>
 
 </Project>

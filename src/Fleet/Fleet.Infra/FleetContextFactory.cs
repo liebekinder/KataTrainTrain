@@ -20,7 +20,7 @@ public class FleetContextFactory : IDesignTimeDbContextFactory<FleetContext>
             .AddJsonFile("appsettings.json")
             .Build();
 
-        var connectionString = configuration.GetConnectionString("Trucs");
+        var connectionString = configuration.GetConnectionString("Fleet");
         var optionsBuilder = new DbContextOptionsBuilder<FleetContext>();
         optionsBuilder.UseSqlServer(connectionString);
 
