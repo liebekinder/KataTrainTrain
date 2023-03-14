@@ -22,6 +22,14 @@ public sealed class LocomotiveRepository
         return await _context.Set<DbLocomotive>().FindAsync(locomotiveId);
     }
 
+    public async Task<DbLocomotive> CreateAsync(DbLocomotive locomotive)
+    {
+        _context.Set<DbLocomotive>().Add(locomotive);
+        await _context.SaveChangesAsync();
+
+        return locomotive;
+    }
+
     public async Task DeleteByIdAsync(int locomotiveId)
     {
         var locomotive = await _context.Set<DbLocomotive>()

@@ -27,8 +27,9 @@ namespace Fleet.Web.Tests.ApiConfigurations
         {
             return
                 new DatabaseSeederConfiguration()
-                    .Associate("GetLocov").With(new GetLocomotivesSeeder())
-                    .Associate("DelLoco").With(new DeleteLocomotiveSeeder());
+                    .Associate("GetLoco").With(new GetLocomotivesSeeder())
+                    .Associate("DelLoco").With(new DeleteLocomotiveSeeder())
+                    .Associate("CreateLoco").With(new CreateLocomotivesSeeder());
         }
     }
 }

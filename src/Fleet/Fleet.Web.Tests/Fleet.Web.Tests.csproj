@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <SpecFlowObsoleteCodeBehindFiles Remove="Features\GetLocomotives - Copy.feature.cs" />
       <SpecFlowObsoleteCodeBehindFiles Remove="Features\Tests - Copy.feature.cs" />
     </ItemGroup>
 
@@ -41,7 +42,17 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Features\CreateLocomotive.feature.cs">
+        <DependentUpon>CreateLocomotive.feature</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
       <SpecFlowFeatureFiles Update="Features\DeleteLocomotive.feature">
+        <Visible>$(UsingMicrosoftNETSdk)</Visible>
+        <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+      </SpecFlowFeatureFiles>
+      <SpecFlowFeatureFiles Update="Features\CreateLocomotive.feature">
         <Visible>$(UsingMicrosoftNETSdk)</Visible>
         <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
       </SpecFlowFeatureFiles>

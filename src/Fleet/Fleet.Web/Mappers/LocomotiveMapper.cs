@@ -1,4 +1,6 @@
-﻿using Fleet.Infra.DbModels;
+﻿using Fleet.Infra;
+using Fleet.Infra.DbModels;
+using Fleet.Web.Payloads;
 using Fleet.Web.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ public sealed class LocomotiveMapper
         return infra.Select(x => MapToViewModel(x)).ToList();
     }
 
-    public static LocomotiveViewModel MapToViewModel(DbLocomotive infra)
+    internal static LocomotiveViewModel MapToViewModel(DbLocomotive infra)
     {
         return new LocomotiveViewModel
         {
@@ -21,6 +23,18 @@ public sealed class LocomotiveMapper
             MaxTractionInTons = infra.MaxTractionInTons,
             Model = (LocomotiveModelViewModel)infra.Model,
             WeightInTons = infra.WeightInTons
+        };
+    }
+
+    internal static DbLocomotive MapToDbModel(LocomotivePayload payload)
+    {
+        return new DbLocomotive
+        {
+            Name = payload.Name!,
+            Brand = payload.Brand!,
+            MaxTractionInTons = payload.MaxTractionInTons!.Value,
+            Model = (DbLocomotiveModel)payload.Model!,
+            WeightInTons = payload.WeightInTons!.Value
         };
     }
 }

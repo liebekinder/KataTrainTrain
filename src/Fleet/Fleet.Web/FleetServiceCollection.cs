@@ -1,5 +1,8 @@
 ﻿using Fleet.Infra;
 using Fleet.Infra.Repositories;
+using Fleet.Web.Payloads;
+using Fleet.Web.Validators;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,5 +18,7 @@ public class FleetServiceCollection : ProjectServiceCollection
 
         services.AddDbContext<FleetContext>(options => options.UseSqlServer(
             configuration.GetConnectionString("Fleet")));
+
+        services.AddScoped<IValidator<LocomotivePayload>, LocomotivePayloadValidator>();
     }
 }

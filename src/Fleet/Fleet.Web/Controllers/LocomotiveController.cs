@@ -1,6 +1,9 @@
 ﻿using Fleet.Infra.Repositories;
 using Fleet.Web.Mappers;
+using Fleet.Web.Payloads;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Web.Extensions;
 using System.Threading.Tasks;
 
 namespace Fleet.Web.Controllers;
@@ -10,10 +13,12 @@ namespace Fleet.Web.Controllers;
 public class LocomotiveController : ControllerBase
 {
     private readonly LocomotiveRepository _locomotiveRepository;
+    private IValidator<LocomotivePayload> _payloadValidator;
 
-    public LocomotiveController(LocomotiveRepository locomotiveRepository)
+    public LocomotiveController(LocomotiveRepository locomotiveRepository, IValidator<LocomotivePayload> payloadValidator)
     {
         _locomotiveRepository = locomotiveRepository;
+        _payloadValidator = payloadValidator;
     }
 
     [HttpGet]
@@ -36,6 +41,23 @@ public class LocomotiveController : ControllerBase
         }
 
         return Ok(LocomotiveMapper.MapToViewModel(locomotive));
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync(LocomotivePayload payload)
+    {
+        var payloadValidator = await _payloadValidator.ValidateAsync(payload);
+        if (!payloadValidator.IsValid)
+        {
+            return this.ValidationProblem(payloadValidator);
+        }
+
+        var locomotive = LocomotiveMapper.MapToDbModel(payload);
+
+        var locomotiveResult = await _locomotiveRepository.CreateAsync(locomotive);
+
+        return Ok(LocomotiveMapper.MapToViewModel(locomotiveResult));
     }
 
     [HttpDelete]
