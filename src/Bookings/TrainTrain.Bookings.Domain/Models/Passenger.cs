@@ -2,11 +2,16 @@
 
 public class Passenger
 {
-    public int Id { get; set; }
+    public string FirstName { get; }
 
-    public string FirstName { get; set; }
+    public string LastName { get; }
 
-    public string LastName { get; set; }
+    public DateOnly BirthDate { get; }
 
-    public DateOnly BirthDate { get; set; }
+    public Passenger(string firstName, string lastName, DateOnly birthDate)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        BirthDate = birthDate;
+    }
 }

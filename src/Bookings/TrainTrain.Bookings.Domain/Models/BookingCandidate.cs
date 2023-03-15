@@ -2,10 +2,17 @@
 
 public sealed class BookingCandidate
 {
-    public int TravelId { get; set; }
+    public int TravelId { get; }
 
-    public string Email { get; set; } = string.Empty;
+    public Email Email { get; }
 
-    public IReadOnlyCollection<Passenger> Passengers { get; set; } = new List<Passenger>();
+    public IReadOnlyCollection<Passenger> Passengers { get; }
+
+    public BookingCandidate(int travalId, string email, IReadOnlyCollection<Passenger> passengers)
+    {
+        TravelId = travalId;
+        Email = new Email(email);
+        Passengers = passengers;
+    }
 }
 
