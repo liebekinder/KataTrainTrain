@@ -33,7 +33,8 @@ public sealed class BookingApplicationService : IBookingApplicationService
         {
             throw new TrainFullException();
         }
+        await _bookingRepository.Book(null);
 
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }
