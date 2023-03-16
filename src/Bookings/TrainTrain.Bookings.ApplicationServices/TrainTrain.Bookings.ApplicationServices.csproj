@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="SecondaryPorts\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TrainTrain.Bookings.Domain\TrainTrain.Bookings.Domain.csproj" />
   </ItemGroup>
 
