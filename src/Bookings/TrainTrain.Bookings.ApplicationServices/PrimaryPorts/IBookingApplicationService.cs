@@ -4,6 +4,6 @@ namespace TrainTrain.Bookings.ApplicationServices.PrimaryPorts;
 
 public interface IBookingApplicationService
 {
-    Task BookAsync(BookingCandidate bookingCandidate);
+    Task<bool> BookAsync(BookingCandidate bookingCandidate);
 }
 

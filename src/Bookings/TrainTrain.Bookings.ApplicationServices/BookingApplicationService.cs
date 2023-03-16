@@ -5,8 +5,8 @@ namespace TrainTrain.Bookings.ApplicationServices;
 
 public sealed class BookingApplicationService : IBookingApplicationService
 {
-    public Task BookAsync(BookingCandidate bookingCandidate)
+    public Task<bool> BookAsync(BookingCandidate bookingCandidate)
     {
-        throw new NotSupportedException();
+        return Task.FromResult(false);
     }
 }
