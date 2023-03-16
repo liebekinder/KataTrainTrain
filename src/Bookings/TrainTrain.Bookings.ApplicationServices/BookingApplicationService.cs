@@ -35,6 +35,11 @@ public sealed class BookingApplicationService : IBookingApplicationService
         }
         await _bookingRepository.Book(new Booking(bookingCandidate.TravelId,bookingCandidate.Email,bookingCandidate.Passengers));
 
-        //throw new NotImplementedException();
+        var booking = new Booking(
+            bookingCandidate.TravelId,
+            bookingCandidate.Email,
+            bookingCandidate.Passengers);
+
+        await _bookingRepository.Book(booking);
     }
 }

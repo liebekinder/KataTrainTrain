@@ -4,5 +4,5 @@ namespace TrainTrain.Bookings.ApplicationServices.SecondaryPorts;
 
 public interface ITravelRepository
 {
-    Task<Train> GetTravelByIdAsync(int travelId);
+    Task<Train?> GetTravelByIdAsync(int travelId);
 }

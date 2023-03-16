@@ -29,9 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainTrain.Bookings.Domain"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainTrain.Bookings.ApplicationServices", "Bookings\TrainTrain.Bookings.ApplicationServices\TrainTrain.Bookings.ApplicationServices.csproj", "{89313D52-1E8C-428A-A9AA-996F659EB179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTrain.Bookings.ApplicationServices.Tests", "Bookings\TrainTrain.Bookings.ApplicationServices.Tests\TrainTrain.Bookings.ApplicationServices.Tests.csproj", "{AFCCB30F-61B1-4799-9A5A-05691F086460}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainTrain.Bookings.ApplicationServices.Tests", "Bookings\TrainTrain.Bookings.ApplicationServices.Tests\TrainTrain.Bookings.ApplicationServices.Tests.csproj", "{AFCCB30F-61B1-4799-9A5A-05691F086460}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTrain.Bookings.Domain.Tests", "Bookings\TrainTrain.Bookings.Domain.Tests\TrainTrain.Bookings.Domain.Tests.csproj", "{55D4B45E-47AD-47BF-B31E-7DE643E5ED3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainTrain.Bookings.Domain.Tests", "Bookings\TrainTrain.Bookings.Domain.Tests\TrainTrain.Bookings.Domain.Tests.csproj", "{55D4B45E-47AD-47BF-B31E-7DE643E5ED3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
