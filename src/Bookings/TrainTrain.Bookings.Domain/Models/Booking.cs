@@ -1,6 +1,4 @@
 ﻿namespace TrainTrain.Bookings.Domain.Models;
 
-public sealed class Booking
-{
-}
+public sealed record Booking(int TravelId, Email Email, IReadOnlyCollection<Passenger> Passengers);
 

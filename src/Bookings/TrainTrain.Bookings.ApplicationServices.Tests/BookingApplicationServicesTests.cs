@@ -87,11 +87,16 @@ public class BookingApplicationServicesTests
             .Setup(x => x.GetTravelByIdAsync(1))
             .ReturnsAsync(new Train(100, 40));
 
+        var expectedBooking = new Booking(
+            booking.TravelId,
+            booking.Email,
+            booking.Passengers);
+
         // Act
         await _bookingApplicationService.BookAsync(booking);
 
         // Assert
         _bookingRepository
-            .Verify(x => x.Book(It.IsAny<Booking>()), Times.Once);
+            .Verify(x => x.Book(expectedBooking), Times.Once);
     }
 }
