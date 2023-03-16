@@ -14,13 +14,24 @@ public sealed class BookingApplicationService : IBookingApplicationService
         _travelRepository = travelRepository;
     }
 
-    public Task BookAsync(BookingCandidate bookingCandidate)
+    public async Task BookAsync(BookingCandidate bookingCandidate)
     {
         if (!bookingCandidate.Passengers.Any())
         {
             throw new NoPassengerException();
         }
 
-        return Task.CompletedTask;
+        var train = await _travelRepository.GetTravelByIdAsync(bookingCandidate.TravelId);
+        if (train == null)
+        {
+            throw new TrainNotFoundException();
+        }
+
+        if (train.IsCapacityExceeded(bookingCandidate.Passengers.Count(), 0.7m))
+        {
+            throw new TrainFullException();
+        }
+
+        throw new NotImplementedException();
     }
 }

@@ -10,13 +10,13 @@ namespace TrainTrain.Bookings.ApplicationServices.Tests;
 public class BookingApplicationServicesTests
 {
     private readonly IBookingApplicationService _bookingApplicationService;
-    private readonly ITravelRepository _travelRepository;
+    private readonly Mock<ITravelRepository> _travelRepository;
 
     public BookingApplicationServicesTests()
     {
-        _travelRepository = Mock.Of<ITravelRepository>();
+        _travelRepository = new Mock<ITravelRepository>();
 
-        _bookingApplicationService = new BookingApplicationService(_travelRepository);
+        _bookingApplicationService = new BookingApplicationService(_travelRepository.Object);
     }
 
     [Fact]
@@ -37,12 +37,35 @@ public class BookingApplicationServicesTests
     {
         // Arrange
         var passengers = new List<Passenger>() { new Passenger("nom", "prenom", new DateOnly(1990, 01, 01)) };
-        var booking = new BookingCandidate(1, "email", passengers);
+        var booking = new BookingCandidate(1, "email@ami", passengers);
 
         // Act
         Func<Task> actual = async () => await _bookingApplicationService.BookAsync(booking);
 
         // Assert
         await actual.Should().ThrowAsync<TrainNotFoundException>();
+    }
+
+    [Fact]
+    public async Task BookAsync_GivenTrainFull_ShouldThrowTrainFullException()
+    {
+        // Arrange
+        var passengers = new List<Passenger>()
+        {
+            new Passenger("nom", "prenom", new DateOnly(1990, 01, 01)),
+            new Passenger("nom", "prenom", new DateOnly(1990, 01, 01)),
+            new Passenger("nom", "prenom", new DateOnly(1990, 01, 01)),
+        };
+        var booking = new BookingCandidate(1, "email@ami", passengers);
+
+        _travelRepository
+            .Setup(x => x.GetTravelByIdAsync(1))
+            .ReturnsAsync(new Train(100, 70));
+
+        // Act
+        Func<Task> actual = async () => await _bookingApplicationService.BookAsync(booking);
+
+        // Assert
+        await actual.Should().ThrowAsync<TrainFullException>();
     }
 }

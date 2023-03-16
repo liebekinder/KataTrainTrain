@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainTrain.Bookings.Applica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTrain.Bookings.ApplicationServices.Tests", "Bookings\TrainTrain.Bookings.ApplicationServices.Tests\TrainTrain.Bookings.ApplicationServices.Tests.csproj", "{AFCCB30F-61B1-4799-9A5A-05691F086460}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTrain.Bookings.Domain.Tests", "Bookings\TrainTrain.Bookings.Domain.Tests\TrainTrain.Bookings.Domain.Tests.csproj", "{55D4B45E-47AD-47BF-B31E-7DE643E5ED3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{AFCCB30F-61B1-4799-9A5A-05691F086460}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFCCB30F-61B1-4799-9A5A-05691F086460}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFCCB30F-61B1-4799-9A5A-05691F086460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55D4B45E-47AD-47BF-B31E-7DE643E5ED3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D4B45E-47AD-47BF-B31E-7DE643E5ED3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D4B45E-47AD-47BF-B31E-7DE643E5ED3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D4B45E-47AD-47BF-B31E-7DE643E5ED3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,5 +102,9 @@ Global
 		{EA4216C7-9551-451E-B13A-46E6769DA725} = {395E6EC3-0E6B-4ADC-BD67-3CBB98FCC579}
 		{89313D52-1E8C-428A-A9AA-996F659EB179} = {395E6EC3-0E6B-4ADC-BD67-3CBB98FCC579}
 		{AFCCB30F-61B1-4799-9A5A-05691F086460} = {395E6EC3-0E6B-4ADC-BD67-3CBB98FCC579}
+		{55D4B45E-47AD-47BF-B31E-7DE643E5ED3A} = {395E6EC3-0E6B-4ADC-BD67-3CBB98FCC579}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8FCBE33-2198-40D7-BA51-8837E5E32BE7}
 	EndGlobalSection
 EndGlobal
