@@ -45,20 +45,18 @@ public class BookingSteps
     [When(@"I book without passenger")]
     public async Task WhenIBookWithoutPassenger()
     {
-        var _travelRepository = Mock.Of<ITravelRepository>();
-        var _bookingRepository = Mock.Of<IBookingRepository>();
-
-        var bookingCandidate = new BookingCandidate(1, "emaikl@email", new List<Passenger>());
-
-        var bookingAppService = new BookingApplicationService(
-            _travelRepository,
-            _bookingRepository);
-
         try
         {
+            var bookingCandidate =
+                new BookingCandidate(1, "emaikl@email", new List<Passenger>());
+
+            var bookingAppService = new BookingApplicationService(
+                Mock.Of<ITravelRepository>(),
+                Mock.Of<IBookingRepository>());
+
             await bookingAppService.BookAsync(bookingCandidate);
         }
-        catch (NoPassengerException ex)
+        catch (Exception ex)
         {
             _bookingContext.ActualException = ex;
         }
@@ -67,23 +65,19 @@ public class BookingSteps
     [When(@"I book a travel for these passengers")]
     public async Task WhenIBookATravelForThesePassengers(Table table)
     {
-        var passengerTable = table.CreateSet<PassengerTable>();
-        if (passengerTable == null)
-        {
-            throw new ArgumentException();
-        }
+        var passengers =
+            table.CreateSet<PassengerTable>()
+                .Select(x => new Passenger(x.FirstName, x.LastName, x.BirthDate))
+                .ToList().AsReadOnly();
 
-        var passengers = passengerTable
-            .Select(x => new Passenger(x.FirstName, x.LastName, x.BirthDate))
-            .ToList().AsReadOnly();
-
-        var bookingCandidate = new BookingCandidate(1, "email@email", passengers);
-
-        var bookingAppService = new BookingApplicationService(
-            _bookingContext.TravelRepository.Object,
-            _bookingContext.BookingRepository.Object);
         try
         {
+            var bookingCandidate = new BookingCandidate(1, "email@email", passengers);
+
+            var bookingAppService = new BookingApplicationService(
+                _bookingContext.TravelRepository.Object,
+                _bookingContext.BookingRepository.Object);
+
             await bookingAppService.BookAsync(bookingCandidate);
         }
         catch (Exception ex)
@@ -95,7 +89,7 @@ public class BookingSteps
     [Then("I cannot book because there are no passenger")]
     public void ThenShouldHaveException()
     {
-        _bookingContext.ActualException.GetType().Should().Be(typeof(NoPassengerException));
+        _bookingContext.ActualException.Should().BeOfType<NoPassengerException>();
     }
 
     [Then(@"I cannot book because there is no train")]
