@@ -66,38 +66,49 @@ public class TrainTests
         act.Should().Throw<ArgumentException>();
     }
 
-
     [Fact]
-    public void GivenNewNumberOfSeatExceedCapacity_ShouldReturnTrue()
+    public void GivenTwoEmptyCarriage_ShouldReturnFalse()
     {
         // Arrange
-        var train = new Train(new[] { new Carriage(10, 10) });
+        var train = new Train(
+            new[] {
+                new Carriage(10, 0),
+                new Carriage(50, 0),
+            });
 
         // Act
-        var actual = train.IsCapacityExceeded(1, 0.7m);
-
-        // Assert
-        actual.Should().BeTrue();
-    }
-
-    [Fact]
-    public void GivenNewNumberOfSeatNotExceedCapacity_ShouldReturnFalse()
-    {
-        // Arrange
-        var train = new Train(new[] { new Carriage(10, 0) });
-
-        // Act
-        var actual = train.IsCapacityExceeded(1, 0.7m);
+        var actual = train.IsCapacityExceeded(1, 1.0m);
 
         // Assert
         actual.Should().BeFalse();
     }
 
     [Fact]
-    public void GivenNewNumberOfSeatNotExceedCapacity_ShouldReturnTrue23222()
+    public void GivenOneEmptyAndOneFullCarriage_ShouldReturnFalse()
     {
         // Arrange
-        var train = new Train(new[] { new Carriage(10, 7) });
+        var train = new Train(
+            new[] {
+                new Carriage(30, 0),
+                new Carriage(60, 60),
+            });
+
+        // Act
+        var actual = train.IsCapacityExceeded(1, 0.3m);
+
+        // Assert
+        actual.Should().BeFalse();
+    }
+
+    [Fact]
+    public void GivenTwoFullCarriage_ShouldReturnTrue()
+    {
+        // Arrange
+        var train = new Train(
+            new[] {
+                new Carriage(54, 54),
+                new Carriage(10, 10),
+            });
 
         // Act
         var actual = train.IsCapacityExceeded(1, 0.7m);
@@ -106,12 +117,15 @@ public class TrainTests
         actual.Should().BeTrue();
     }
 
-
     [Fact]
-    public void GivenNewNumberOfSeatNotExceedCapacity_ShouldReturnTrue23222deezze()
+    public void GivenTwoCarriageAtRatioCapacity_ShouldReturnTrue()
     {
         // Arrange
-        var train = new Train(new[] { new Carriage(10, 7) });
+        var train = new Train(
+            new[] {
+                new Carriage(10, 7),
+                new Carriage(40, 28),
+            });
 
         // Act
         var actual = train.IsCapacityExceeded(1, 0.7m);

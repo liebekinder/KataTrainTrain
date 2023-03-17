@@ -2,10 +2,6 @@
 
 public sealed class Train
 {
-    public int Capacity { get; }
-
-    public int NumberOfBookedSeat { get; }
-
     private readonly IReadOnlyCollection<Carriage> _carriages;
 
 
@@ -15,15 +11,12 @@ public sealed class Train
         {
             throw new ArgumentException(nameof(carriages));
         }
-
-        Capacity = carriages.Sum(c => c.Capacity);
-        NumberOfBookedSeat = carriages.Sum(c => c.TakenSeatsNumber);
         _carriages = carriages;
     }
 
     public bool IsCapacityExceeded(int numberOfNewPassenger, decimal maximumRate)
     {
-        return _carriages.Any(c => c.IsCapacityExceeded(numberOfNewPassenger, maximumRate));
+        return _carriages.All(c => c.IsCapacityExceeded(numberOfNewPassenger, maximumRate));
     }
 }
 
