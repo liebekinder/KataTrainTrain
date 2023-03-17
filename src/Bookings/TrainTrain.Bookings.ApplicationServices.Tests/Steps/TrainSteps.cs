@@ -20,13 +20,13 @@ public class TrainSteps
     [Given(@"a travel without train")]
     public void GivenATravelWithoutTrain()
     {
-        _trainContext.TravelRepository = TrainBuilder.CreateTrain(1, null);
+        _trainContext.TravelRepository = TrainBuilder.CreateTrain(new TravelId(1), null);
     }
 
     [Given(@"a train with a capacity of (.*) and (.*) seats already booked")]
     public void GivenATrainWithACapacityOfAndSeatsAlreadyBooked(int capacity, int numberOfSeatBooked)
     {
-        _trainContext.TravelRepository = TrainBuilder.CreateTrain(1, new Train(capacity, numberOfSeatBooked));
+        _trainContext.TravelRepository = TrainBuilder.CreateTrain(new TravelId(1), new Train(capacity, numberOfSeatBooked));
     }
 
     [Given(@"a train with these carriages")]
@@ -37,8 +37,7 @@ public class TrainSteps
             .Select(x => new Carriage(x.Capacity, x.TakenSeatsNumber))
             .ToList();
 
-        _trainContext.TravelRepository = TrainBuilder.CreateTrain(1, new Train(carriages));
+        _trainContext.TravelRepository = TrainBuilder.CreateTrain(new TravelId(1), new Train(carriages));
     }
 
 }
-

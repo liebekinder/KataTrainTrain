@@ -8,8 +8,8 @@ public sealed class BookingMapper
     public static BookingCandidate ToCandidate(BookingPayload payload)
     {
         return new BookingCandidate(
-            payload.TravelId,
-            payload.Email,
+            new TravelId(payload.TravelId),
+            new Email(payload.Email),
             payload.Passengers.Select(pas =>
                 new Passenger(
                     pas.FirstName,
@@ -17,4 +17,3 @@ public sealed class BookingMapper
                     pas.BirthDate)).ToList());
     }
 }
-

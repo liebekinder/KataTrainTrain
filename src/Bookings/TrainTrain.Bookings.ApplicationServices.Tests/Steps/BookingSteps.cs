@@ -28,7 +28,10 @@ public class BookingSteps
         try
         {
             var bookingCandidate =
-                new BookingCandidate(1, "emaikl@email", new List<Passenger>());
+                new BookingCandidate(
+                    new TravelId(1),
+                    new Email("emaikl@email"),
+                    new List<Passenger>());
 
             var bookingAppService = new BookingApplicationService(
                 Mock.Of<ITravelRepository>(),
@@ -52,7 +55,10 @@ public class BookingSteps
 
         try
         {
-            var bookingCandidate = new BookingCandidate(1, "email@email", passengers);
+            var bookingCandidate = new BookingCandidate(
+                new TravelId(1),
+                new Email("emaikl@email"),
+                passengers);
 
             var bookingAppService = new BookingApplicationService(
                 _trainContext.TravelRepository.Object,

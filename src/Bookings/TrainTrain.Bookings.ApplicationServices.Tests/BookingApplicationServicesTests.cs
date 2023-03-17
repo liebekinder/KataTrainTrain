@@ -12,6 +12,8 @@ public class BookingApplicationServicesTests
     private readonly IBookingApplicationService _bookingApplicationService;
     private readonly Mock<ITravelRepository> _travelRepository;
     private readonly Mock<IBookingRepository> _bookingRepository;
+    private readonly TravelId _travelId = new TravelId(1);
+    private Email _email = new Email("Test@lucca.fr");
 
     public BookingApplicationServicesTests()
     {
@@ -27,7 +29,11 @@ public class BookingApplicationServicesTests
     public async Task BookAsync_GivenNoPassenger_ShouldThrowNoPassengerException()
     {
         // Arrange
-        var bookCandidate = new BookingCandidate(travalId: 0, email: "Test@lucca.fr", passengers: new List<Passenger>());
+        var bookCandidate =
+            new BookingCandidate(
+                _travelId,
+                _email,
+                new List<Passenger>());
 
         // Act
         Func<Task> actual = async () => await _bookingApplicationService.BookAsync(bookCandidate);
@@ -41,7 +47,10 @@ public class BookingApplicationServicesTests
     {
         // Arrange
         var passengers = new List<Passenger>() { new Passenger("nom", "prenom", new DateOnly(1990, 01, 01)) };
-        var booking = new BookingCandidate(1, "email@ami", passengers);
+        var booking = new BookingCandidate(
+            _travelId,
+            _email,
+            passengers);
 
         // Act
         Func<Task> actual = async () => await _bookingApplicationService.BookAsync(booking);
@@ -60,10 +69,14 @@ public class BookingApplicationServicesTests
             new Passenger("nom", "prenom", new DateOnly(1990, 01, 01)),
             new Passenger("nom", "prenom", new DateOnly(1990, 01, 01)),
         };
-        var booking = new BookingCandidate(1, "email@ami", passengers);
+        var booking = new BookingCandidate(
+            _travelId,
+            _email,
+            passengers);
+
 
         _travelRepository
-            .Setup(x => x.GetTravelByIdAsync(1))
+            .Setup(x => x.GetTravelByIdAsync(_travelId))
             .ReturnsAsync(new Train(100, 70));
 
         // Act
@@ -81,10 +94,13 @@ public class BookingApplicationServicesTests
         {
             new Passenger("nom", "prenom", new DateOnly(1990, 01, 01)),
         };
-        var booking = new BookingCandidate(1, "email@ami", passengers);
+        var booking = new BookingCandidate(
+            _travelId,
+            _email,
+            passengers);
 
         _travelRepository
-            .Setup(x => x.GetTravelByIdAsync(1))
+            .Setup(x => x.GetTravelByIdAsync(_travelId))
             .ReturnsAsync(new Train(100, 40));
 
         var expectedBooking = new Booking(

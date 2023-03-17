@@ -10,7 +10,7 @@ public class TrainBuilder
     {
     }
 
-    internal static Mock<ITravelRepository> CreateTrain(int travelId, Train? train)
+    internal static Mock<ITravelRepository> CreateTrain(TravelId travelId, Train? train)
     {
         var trainRepository = new Mock<ITravelRepository>();
         trainRepository
@@ -20,4 +20,3 @@ public class TrainBuilder
         return trainRepository;
     }
 }
-
