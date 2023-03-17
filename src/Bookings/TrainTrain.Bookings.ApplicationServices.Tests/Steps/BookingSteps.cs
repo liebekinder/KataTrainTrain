@@ -14,32 +14,12 @@ namespace TrainTrain.Bookings.ApplicationServices.Tests.Steps;
 public class BookingSteps
 {
     private readonly BookingContext _bookingContext;
+    private readonly TrainContext _trainContext;
 
-    public BookingSteps(BookingContext bookingContext)
+    public BookingSteps(BookingContext bookingContext, TrainContext trainContext)
     {
         _bookingContext = bookingContext;
-    }
-
-    [Given(@"a travel without train")]
-    public void GivenATravelWithoutTrain()
-    {
-        var travelRepository = new Mock<ITravelRepository>();
-        travelRepository
-            .Setup(x => x.GetTravelByIdAsync(1))
-            .ReturnsAsync((Train?)null);
-
-        _bookingContext.TravelRepository = travelRepository;
-    }
-
-    [Given(@"a train with a capacity of (.*) and (.*) seats already booked")]
-    public void GivenATrainWithACapacityOfAndSeatsAlreadyBooked(int capacity, int numberOfSeatBooked)
-    {
-        var travelRepository = new Mock<ITravelRepository>();
-        travelRepository
-            .Setup(x => x.GetTravelByIdAsync(1))
-            .ReturnsAsync(new Train(capacity, numberOfSeatBooked));
-
-        _bookingContext.TravelRepository = travelRepository;
+        _trainContext = trainContext;
     }
 
     [When(@"I book without passenger")]
@@ -75,7 +55,7 @@ public class BookingSteps
             var bookingCandidate = new BookingCandidate(1, "email@email", passengers);
 
             var bookingAppService = new BookingApplicationService(
-                _bookingContext.TravelRepository.Object,
+                _trainContext.TravelRepository.Object,
                 _bookingContext.BookingRepository.Object);
 
             await bookingAppService.BookAsync(bookingCandidate);
@@ -95,13 +75,13 @@ public class BookingSteps
     [Then(@"I cannot book because there is no train")]
     public void ThenICannotBookBecauseThereIsNoTrain()
     {
-        _bookingContext.ActualException.GetType().Should().Be(typeof(TrainNotFoundException));
+        _bookingContext.ActualException.Should().BeOfType<TrainNotFoundException>();
     }
 
     [Then(@"I cannot book because the train is full")]
     public void ThenICannotBookBecauseTheTrainIsFull()
     {
-        _bookingContext.ActualException.GetType().Should().Be(typeof(TrainFullException));
+        _bookingContext.ActualException.Should().BeOfType<TrainFullException>();
     }
 
     [Then(@"my booking is ok")]
