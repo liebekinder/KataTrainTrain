@@ -26,7 +26,7 @@ public class TrainSteps
     [Given(@"a train with a capacity of (.*) and (.*) seats already booked")]
     public void GivenATrainWithACapacityOfAndSeatsAlreadyBooked(int capacity, int numberOfSeatBooked)
     {
-        _trainContext.TravelRepository = TrainBuilder.CreateTrain(new TravelId(1), new Train(capacity, numberOfSeatBooked));
+        _trainContext.TravelRepository = TrainBuilder.CreateTrain(new TravelId(1), new Train(new[] { new Carriage(capacity, numberOfSeatBooked) }));
     }
 
     [Given(@"a train with these carriages")]

@@ -11,7 +11,7 @@ public class TrainTests
         // Arrange
 
         // Act
-        Action act = () => new Train(-10, 2);
+        Action act = () => new Train(new[] { new Carriage(-10, 2) });
 
         // Assert
         act.Should().Throw<ArgumentException>();
@@ -23,7 +23,7 @@ public class TrainTests
         // Arrange
 
         // Act
-        Action act = () => new Train(10, -2);
+        Action act = () => new Train(new[] { new Carriage(10, -2) });
 
         // Assert
         act.Should().Throw<ArgumentException>();
@@ -35,7 +35,7 @@ public class TrainTests
         // Arrange
 
         // Act
-        Action act = () => new Train(10, 12);
+        Action act = () => new Train(new[] { new Carriage(10, 12) });
 
         // Assert
         act.Should().Throw<ArgumentException>();
@@ -47,7 +47,7 @@ public class TrainTests
         // Arrange
 
         // Act
-        var train = new Train(10, 10);
+        var train = new Train(new[] { new Carriage(10, 10) });
 
         // Assert
         train.Should().NotBeNull();
@@ -57,7 +57,7 @@ public class TrainTests
     public void GivenNewNumberOfSeatExceedCapacity_ShouldReturnTrue()
     {
         // Arrange
-        var train = new Train(10, 10);
+        var train = new Train(new[] { new Carriage(10, 10) });
 
         // Act
         var actual = train.IsCapacityExceeded(1, 0.7m);
@@ -68,6 +68,19 @@ public class TrainTests
 
     [Fact]
     public void GivenATrainWithoutCarriages_ShouldThrowError()
+    {
+        // Arrange
+        var carriages = Array.Empty<Carriage>();
+
+        // Act
+        Action act = () => new Train(carriages);
+
+        // Assert
+        act.Should().Throw<ArgumentException>();
+    }
+
+    [Fact]
+    public void GivenATrainCarriage_ShouldReturnTrueIfCapacity()
     {
         // Arrange
         var carriages = Array.Empty<Carriage>();

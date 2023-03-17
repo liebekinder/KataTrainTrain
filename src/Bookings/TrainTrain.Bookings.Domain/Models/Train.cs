@@ -6,25 +6,16 @@ public sealed class Train
 
     public int NumberOfBookedSeat { get; }
 
-    public Train(int capacity, int initialNumberOfBookedSeat)
-    {
-        if (capacity <= 0)
-        {
-            throw new ArgumentException("train capacity should have at least one seat");
-        }
-
-        if (initialNumberOfBookedSeat < 0 || initialNumberOfBookedSeat > capacity)
-        {
-            throw new ArgumentException("booked seat number invalid");
-        }
-
-        Capacity = capacity;
-        NumberOfBookedSeat = initialNumberOfBookedSeat;
-    }
 
     public Train(IReadOnlyCollection<Carriage> carriages)
     {
+        if (!carriages.Any())
+        {
+            throw new ArgumentException(nameof(carriages));
+        }
 
+        Capacity = carriages.Sum(c => c.Capacity);
+        NumberOfBookedSeat = carriages.Sum(c => c.TakenSeatsNumber);
     }
 
     public bool IsCapacityExceeded(int numberOfNewPassenger, decimal maximumRate)

@@ -77,7 +77,7 @@ public class BookingApplicationServicesTests
 
         _travelRepository
             .Setup(x => x.GetTravelByIdAsync(_travelId))
-            .ReturnsAsync(new Train(100, 70));
+            .ReturnsAsync(new Train(new[] { new Carriage(100, 70) }));
 
         // Act
         Func<Task> actual = async () => await _bookingApplicationService.BookAsync(booking);
@@ -101,7 +101,7 @@ public class BookingApplicationServicesTests
 
         _travelRepository
             .Setup(x => x.GetTravelByIdAsync(_travelId))
-            .ReturnsAsync(new Train(100, 40));
+            .ReturnsAsync(new Train(new[] { new Carriage(100, 40) }));
 
         var expectedBooking = new Booking(
             booking.TravelId,
