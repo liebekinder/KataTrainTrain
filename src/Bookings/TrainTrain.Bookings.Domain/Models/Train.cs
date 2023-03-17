@@ -22,6 +22,11 @@ public sealed class Train
         NumberOfBookedSeat = initialNumberOfBookedSeat;
     }
 
+    public Train(IReadOnlyCollection<Carriage> carriages)
+    {
+
+    }
+
     public bool IsCapacityExceeded(int numberOfNewPassenger, decimal maximumRate)
     {
         var newNumberOfBookedSeat = NumberOfBookedSeat + numberOfNewPassenger;

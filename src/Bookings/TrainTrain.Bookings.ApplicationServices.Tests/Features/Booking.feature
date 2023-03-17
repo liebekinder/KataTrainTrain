@@ -28,3 +28,14 @@ Scenario: Booking train
 		| John      | Doe      | 12/10/2020 |
 		| Sarah     | Connor   | 12/10/2020 |
 	Then my booking is ok
+
+Scenario: Booking a full train with carriages
+	Given a train with these carriages
+		| Capacity | Taken Seats Number |
+		| 100      | 70                 |
+		| 100      | 70                 |
+	When I book a travel for these passengers
+		| FirstName | LastName | BirthDate  |
+		| John      | Doe      | 12/10/2020 |
+		| Sarah     | Connor   | 12/10/2020 |
+	Then I cannot book because the train is full
