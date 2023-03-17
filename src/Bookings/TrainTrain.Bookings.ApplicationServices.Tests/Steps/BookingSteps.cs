@@ -23,7 +23,7 @@ public class BookingSteps
     [Given(@"a travel without train")]
     public void GivenATravelWithoutTrain()
     {
-        Mock<ITravelRepository> travelRepository = new Mock<ITravelRepository>();
+        var travelRepository = new Mock<ITravelRepository>();
         travelRepository
             .Setup(x => x.GetTravelByIdAsync(1))
             .ReturnsAsync((Train?)null);
@@ -34,7 +34,7 @@ public class BookingSteps
     [Given(@"a train with a capacity of (.*) and (.*) seats already booked")]
     public void GivenATrainWithACapacityOfAndSeatsAlreadyBooked(int capacity, int numberOfSeatBooked)
     {
-        Mock<ITravelRepository> travelRepository = new Mock<ITravelRepository>();
+        var travelRepository = new Mock<ITravelRepository>();
         travelRepository
             .Setup(x => x.GetTravelByIdAsync(1))
             .ReturnsAsync(new Train(capacity, numberOfSeatBooked));
@@ -45,8 +45,8 @@ public class BookingSteps
     [When(@"I book without passenger")]
     public async Task WhenIBookWithoutPassenger()
     {
-        ITravelRepository _travelRepository = Mock.Of<ITravelRepository>();
-        IBookingRepository _bookingRepository = Mock.Of<IBookingRepository>();
+        var _travelRepository = Mock.Of<ITravelRepository>();
+        var _bookingRepository = Mock.Of<IBookingRepository>();
 
         var bookingCandidate = new BookingCandidate(1, "emaikl@email", new List<Passenger>());
 
@@ -116,4 +116,3 @@ public class BookingSteps
         _bookingContext.BookingRepository.Verify(x => x.Book(It.IsAny<Booking>()), Times.Once);
     }
 }
-
