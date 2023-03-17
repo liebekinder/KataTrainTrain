@@ -54,19 +54,6 @@ public class TrainTests
     }
 
     [Fact]
-    public void GivenNewNumberOfSeatExceedCapacity_ShouldReturnTrue()
-    {
-        // Arrange
-        var train = new Train(new[] { new Carriage(10, 10) });
-
-        // Act
-        var actual = train.IsCapacityExceeded(1, 0.7m);
-
-        // Assert
-        actual.Should().BeTrue();
-    }
-
-    [Fact]
     public void GivenATrainWithoutCarriages_ShouldThrowError()
     {
         // Arrange
@@ -77,6 +64,20 @@ public class TrainTests
 
         // Assert
         act.Should().Throw<ArgumentException>();
+    }
+
+
+    [Fact]
+    public void GivenNewNumberOfSeatExceedCapacity_ShouldReturnTrue()
+    {
+        // Arrange
+        var train = new Train(new[] { new Carriage(10, 10) });
+
+        // Act
+        var actual = train.IsCapacityExceeded(1, 0.7m);
+
+        // Assert
+        actual.Should().BeTrue();
     }
 
     [Fact]

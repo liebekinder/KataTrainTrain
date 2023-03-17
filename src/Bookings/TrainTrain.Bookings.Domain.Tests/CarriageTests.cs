@@ -35,5 +35,15 @@ public sealed class CarriageTests
         // Assert
         act.Should().Throw<ArgumentOutOfRangeException>();
     }
+
+    [Fact]
+    public void GivenAllSeatsAvailable_ShouldBeOk()
+    {
+        // Act
+        Action act = () => new Carriage(10, 0);
+
+        // Assert
+        act.Should().NotThrow();
+    }
 }
 

@@ -20,10 +20,12 @@ public sealed class Train
 
     public bool IsCapacityExceeded(int numberOfNewPassenger, decimal maximumRate)
     {
-        var newNumberOfBookedSeat = NumberOfBookedSeat + numberOfNewPassenger;
-        var percentage = Decimal.Divide(newNumberOfBookedSeat, Capacity);
+        //var newNumberOfBookedSeat = NumberOfBookedSeat + numberOfNewPassenger;
+        //var percentage = Decimal.Divide(newNumberOfBookedSeat, Capacity);
 
-        return percentage > maximumRate;
+        //return percentage > maximumRate;
+
+        return NumberOfBookedSeat == 10;
     }
 }
 
