@@ -24,7 +24,7 @@ public sealed class Carriage
 
     public bool IsCapacityExceeded(int numberOfNewPassenger, decimal maximumRate)
     {
-        var threshold = 0.7 * Capacity;
+        var threshold = maximumRate * Capacity;
         return TakenSeatsNumber + numberOfNewPassenger > threshold;
     }
 }

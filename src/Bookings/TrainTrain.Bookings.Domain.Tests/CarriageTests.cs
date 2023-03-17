@@ -121,7 +121,7 @@ public sealed class CarriageTests
     [InlineData(70, 0.7)]
     [InlineData(54, 0.5)]
     [InlineData(0, 0.0)]
-    public void GivenNewNumberOfSeatNotExceedThreshold_ShouldReturnFalse(int takenSeats, decimal ratio)
+    public void GivenNewNumberOfSeatExceedThreshold_ShouldReturnTrue(int takenSeats, decimal ratio)
     {
         // Arrange
         var carriage = new Carriage(100, takenSeats);
@@ -130,6 +130,6 @@ public sealed class CarriageTests
         var actual = carriage.IsCapacityExceeded(1, ratio);
 
         // Assert
-        actual.Should().BeFalse();
+        actual.Should().BeTrue();
     }
 }
