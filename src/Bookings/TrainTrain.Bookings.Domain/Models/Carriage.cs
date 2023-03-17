@@ -24,11 +24,6 @@ public sealed class Carriage
 
     public bool IsCapacityExceeded(int numberOfNewPassenger, decimal maximumRate)
     {
-        //var newNumberOfBookedSeat = NumberOfBookedSeat + numberOfNewPassenger;
-        //var percentage = Decimal.Divide(newNumberOfBookedSeat, Capacity);
-
-        //return percentage > maximumRate;
-
-        return TakenSeatsNumber >= 7;
+        return TakenSeatsNumber + numberOfNewPassenger > 7;
     }
 }
