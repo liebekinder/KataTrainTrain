@@ -114,5 +114,22 @@ public sealed class CarriageTests
         // Assert
         actual.Should().BeFalse();
     }
-}
 
+    [Theory]
+    [InlineData(100, 1.0)]
+    [InlineData(90, 0.9)]
+    [InlineData(70, 0.7)]
+    [InlineData(54, 0.5)]
+    [InlineData(0, 0.0)]
+    public void GivenNewNumberOfSeatNotExceedThreshold_ShouldReturnFalse(int takenSeats, decimal ratio)
+    {
+        // Arrange
+        var carriage = new Carriage(100, takenSeats);
+
+        // Act
+        var actual = carriage.IsCapacityExceeded(1, ratio);
+
+        // Assert
+        actual.Should().BeFalse();
+    }
+}
