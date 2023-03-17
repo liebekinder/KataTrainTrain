@@ -92,4 +92,17 @@ public class TrainTests
         // Assert
         actual.Should().BeFalse();
     }
+
+    [Fact]
+    public void GivenNewNumberOfSeatNotExceedCapacity_ShouldReturnTrue23222()
+    {
+        // Arrange
+        var train = new Train(new[] { new Carriage(10, 7) });
+
+        // Act
+        var actual = train.IsCapacityExceeded(1, 0.7m);
+
+        // Assert
+        actual.Should().BeTrue();
+    }
 }
