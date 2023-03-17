@@ -45,5 +45,41 @@ public sealed class CarriageTests
         // Assert
         act.Should().NotThrow();
     }
+
+    [Theory]
+    [InlineData(10, 1)]
+    [InlineData(7, 1)]
+    [InlineData(6, 2)]
+    [InlineData(5, 4)]
+    [InlineData(0, 8)]
+    public void GivenNewNumberOfSeatExceedCapacity_ShouldReturnTrue(int takenSeats, int numberOfPassager)
+    {
+        // Arrange
+        var carriage = new Carriage(10, takenSeats);
+
+        // Act
+        var actual = carriage.IsCapacityExceeded(numberOfPassager, 0.7m);
+
+        // Assert
+        actual.Should().BeTrue();
+    }
+
+    [Theory]
+    [InlineData(7, 0)]
+    [InlineData(6, 1)]
+    [InlineData(5, 3)]
+    [InlineData(0, 7)]
+    public void GivenNewNumberOfSeatNotExceedCapacity_ShouldReturnFalse(int takenSeats, int numberOfPassager)
+    {
+        // Arrange
+        var carriage = new Carriage(10, takenSeats);
+
+        // Act
+        var actual = carriage.IsCapacityExceeded(numberOfPassager, 0.7m);
+
+        // Assert
+        actual.Should().BeFalse();
+    }
+
 }
 

@@ -6,6 +6,8 @@ public sealed class Train
 
     public int NumberOfBookedSeat { get; }
 
+    private readonly IReadOnlyCollection<Carriage> _carriages;
+
 
     public Train(IReadOnlyCollection<Carriage> carriages)
     {
@@ -16,16 +18,12 @@ public sealed class Train
 
         Capacity = carriages.Sum(c => c.Capacity);
         NumberOfBookedSeat = carriages.Sum(c => c.TakenSeatsNumber);
+        _carriages = carriages;
     }
 
     public bool IsCapacityExceeded(int numberOfNewPassenger, decimal maximumRate)
     {
-        //var newNumberOfBookedSeat = NumberOfBookedSeat + numberOfNewPassenger;
-        //var percentage = Decimal.Divide(newNumberOfBookedSeat, Capacity);
-
-        //return percentage > maximumRate;
-
-        return NumberOfBookedSeat == 10;
+        return _carriages.Any(c => c.IsCapacityExceeded(numberOfNewPassenger, maximumRate));
     }
 }
 
