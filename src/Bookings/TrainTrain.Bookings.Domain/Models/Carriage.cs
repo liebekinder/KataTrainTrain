@@ -13,7 +13,7 @@ public sealed class Carriage
             throw new ArgumentException();
         }
 
-        if (takenSeatsNumber <= 0 || takenSeatsNumber > capacity)
+        if (takenSeatsNumber < 0 || capacity < takenSeatsNumber)
         {
             throw new ArgumentOutOfRangeException();
         }
@@ -22,4 +22,3 @@ public sealed class Carriage
         TakenSeatsNumber = takenSeatsNumber;
     }
 }
-
